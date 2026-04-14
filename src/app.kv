@@ -1,0 +1,98 @@
+#:import dp kivy.metrics.dp
+
+<AppLayout>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgb: 0.08, 0.08, 0.08
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        size_hint_y: 0.1
+        Label:
+            text: 'opentuna'
+            bold: True
+            font_size: '20sp'
+
+    AnchorLayout:
+        size_hint_y: 0.55
+        anchor_x: 'center'
+        anchor_y: 'center'
+        FloatLayout:
+            size_hint: None, None
+            size: root.gauge_size, root.gauge_size
+            TunerGauge:
+                cents: root.cents_value
+                size_hint: 1, 1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            Label:
+                text: root.display_note
+                font_size: f'{root.note_font_sp}sp'
+                bold: True
+                color: root.note_color
+                pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            Label:
+                text: root.display_accidental
+                font_size: f'{root.note_font_sp * 0.4}sp'
+                color: 0.6, 0.6, 0.6, 1
+                pos_hint: {'center_x': 0.65, 'center_y': 0.52}
+
+    BoxLayout:
+        size_hint_y: 0.12
+        Label:
+            text: root.freq_text
+            color: 0.5, 0.5, 0.5, 1
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size
+        Label:
+            text: root.cents_text
+            color: 0.5, 0.5, 0.5, 1
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size
+
+    BoxLayout:
+        size_hint_y: 0.2
+        padding: dp(20)
+        spacing: dp(10)
+        Widget:
+        StringBtn:
+            text: 'E'
+            active: 1 if root.current_note == 'E' else 0
+        StringBtn:
+            text: 'A'
+            active: 1 if root.current_note == 'A' else 0
+        StringBtn:
+            text: 'D'
+            active: 1 if root.current_note == 'D' else 0
+        StringBtn:
+            text: 'G'
+            active: 1 if root.current_note == 'G' else 0
+        StringBtn:
+            text: 'B'
+            active: 1 if root.current_note == 'B' else 0
+        StringBtn:
+            text: 'E'
+            active: 1 if root.current_note == 'E' else 0
+        Widget:
+
+    Label:
+        size_hint_y: 0.08
+        text: 'Made by Kayk Caputo'
+        font_size: '12sp'
+        color: 0.3, 0.3, 0.3, 1
+
+<StringBtn@AnchorLayout>:
+    text: ''
+    active: 0
+    size_hint: None, None
+    size: dp(42), dp(42)
+    StringButton:
+        active: root.active
+    Label:
+        text: root.text
+        color: (0,0,0,1) if root.active else (0.6,0.6,0.6,1)
+        bold: True
